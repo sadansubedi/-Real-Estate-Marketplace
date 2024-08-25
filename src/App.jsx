@@ -4,9 +4,11 @@ import Profile from './pages/Profile.jsx'
 import About from './pages/About.jsx'
 import Signin from './pages/Signin.jsx'
 import Signout from './pages/Signout.jsx'
+import Header from "./components/Header.jsx"
 function App() {
   return (
     <BrowserRouter>
+    <Header/>
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/about" element={<About/>}/>
