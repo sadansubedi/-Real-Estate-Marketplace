@@ -3,7 +3,7 @@ import Home from './pages/Home.jsx'
 import Profile from './pages/Profile.jsx'
 import About from './pages/About.jsx'
 import Signin from './pages/Signin.jsx'
-import Signout from './pages/Signout.jsx'
+import Signup from './pages/Signup.jsx'
 import Header from "./components/Header.jsx"
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Route path="/about" element={<About/>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/signin" element={<Signin/>}/>
-      <Route path="/signout" element={<Signout/>}/>
+      <Route path="/signup" element={<Signup/>}/>
     </Routes>
     {/* <h1 className='text-green-700 bg-slate-950'>aba app hoina </h1> */}
     </BrowserRouter>

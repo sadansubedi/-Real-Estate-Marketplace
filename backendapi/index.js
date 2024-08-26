@@ -1,9 +1,12 @@
 import express from 'express'//Ecmascript 6 
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
+import userouter from './routes/userroute.js'
+import authrouter from './routes/authroute.js'
 dotenv.config();
 // console.log(process.env.MONGO_URL)
 
+const app = express();
 
 mongoose.connect(process.env.MONGO_URL).then(()=>{
     console.log("connected to mongodb");
@@ -11,17 +14,25 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
     console.log(error)    
 })
 
-
-
-const app = express();
-
-
 const port = process.env.PORT || '3000';
 
+app.use(express.json())
+app.use("/api/user",userouter)
+app.use("/api/auth",authrouter)
 
-app.get('/',(req,res) =>{
-    res.send("Hell sadan it's you first express code  ")
+
+//middleware and function to handle possible error
+app.use((err,req,res,next)=>{
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    return res.status(statusCode).json({
+        success:false,
+        statusCode:statusCode,
+        message,
+    })
+
 })
+
 
 app.listen(port,()=>{
     console.log(`Server listening at http://localhost:${port}`);
