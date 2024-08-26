@@ -17,21 +17,6 @@ export default defineConfig({
   },
 });
 
-
-
-// export default defineConfig({
-//   server:{
-//     proxy:{
-//       '/api':{
-//         target: 'http://localhost:3000/',
-//         changeOrigin:true,
-//         secure:false,
-//       },
-//     },
-//   },
-//   plugins: [react()],
-// })
-
 /*
 Wre added this line to make post request for signup 1 hr :58 min
 server:{
