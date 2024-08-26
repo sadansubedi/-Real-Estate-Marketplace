@@ -35,7 +35,7 @@ const signin = async(req,res,next)=>{
         const validpassword = bcryptjs.compareSync(password,validUser.password);
         if(!validpassword) return next(errorHandler(401,"Wrong credentials"));
         const token = jwt.sign({id:validUser._id}, process.env.JWT_SECRET);
-        const {password:pass , ...rest} = validUser._doc;
+        const {password:pass , ...rest} = validUser._doc;//to return email username except password
         res.cookie('access_token',token,{httpOnly:true}).status(200).json(rest);
     } catch (error) {
         next(error);
