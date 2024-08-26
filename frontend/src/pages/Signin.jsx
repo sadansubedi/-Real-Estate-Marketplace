@@ -1,13 +1,15 @@
 import { useState } from "react"
 import { Link,useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { signInStart,signInSuccess,signInFailure } from "../redux/user/userSlice";
 const Signin = () => {
   const [FormData,setFormData] = useState({});
-  const [Error,setError] = useState(null);
-  const [Loading,setLoading] =useState(false);
+  const {loading,error} = useSelector((state)=>state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange =(e)=>{
-      setFormData(
+      setFormData(  
         {
           ...FormData,
           [e.target.id] : e.target.value
@@ -15,10 +17,12 @@ const Signin = () => {
       )
   }
   // console.log(FormData)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+
     try {
+      dispatch(signInStart());
       const response = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: {
@@ -32,20 +36,19 @@ const Signin = () => {
       //   throw new Error(`HTTP error! status: ${response.status}, details: ${errorText}`);
       // }
   
-      const data = await response.json();
+      const data = await response.json();//here all data comes except password,its bcoz of authcontroller.js
       if(data.success === false){
-        setError(data.message);
-        setLoading(false);
+       
+        dispatch(signInFailure(data.message));
         return;
       }
 
-      setLoading(false);
-      setError(null);
+      dispatch(signInSuccess(data));
       navigate('/');
       console.log(data);
 
     } catch (error) {
-      setLoading(false)
+      dispatch(signInFailure(error.message));
       console.error('Error:', error);
     }
   };
@@ -58,7 +61,7 @@ const Signin = () => {
       <form onSubmit={handleSubmit} className='flex flex-col gap-4 '>
       <input type="email" placeholder='email' className='border p-3 rounded-lg' id='email' onChange={handleChange}/>
       <input type="password" placeholder='password' className='border p-3 rounded-lg' id='password' onChange={handleChange}/>
-      <button disabled={Loading} className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-85'>{Loading ? 'Loading...' : 'Sign In'}</button>
+      <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-85'>{loading ? 'Loading...' : 'Sign In'}</button>
       </form>
       <div className='flex gap-2 mt-5'>
         <p>Don't have an account?</p>
@@ -66,7 +69,7 @@ const Signin = () => {
           <span className="text-blue-700">Sign Up</span>
         </Link>
       </div>
-      {Error && <p className="text-red-500 mt-5">{Error}</p>}
+      {error && <p className="text-red-500 mt-5">{error}</p>}
     </div>
   )
 }
