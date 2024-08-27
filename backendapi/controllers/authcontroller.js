@@ -47,6 +47,8 @@ const signin = async(req,res,next)=>{
 const google = async(req,res,next)=>{
     try {
         const user = await User.findOne({email:req.body.email})
+
+        //if user signin previosly then we have data of that user in DB but if not that means else then create new user and save it to database 
         if(user){
             const token = jwt.sign({id:user._id},process.env.JWT_SECRET);
             const {password:pass, ...rest} =user._doc ;
@@ -54,7 +56,9 @@ const google = async(req,res,next)=>{
         } else{
             const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
             const hashedPassword = bcryptjs.hashSync(generatedPassword,10);
-            const newUser = new User({username:req.body.name.split("").join("").toLowerCase() + Math.random().toString(36).slice(-4) ,
+
+            const newUser = new User({ //here it get username :req.body.name ,email,avatar from body: JSON.stringify of OAuth.jsx ok 
+                username:req.body.name.split("").join("").toLowerCase() + Math.random().toString(36).slice(-4) ,
                 email:req.body.email,
                 password:hashedPassword,
                 avatar:req.body.photo,

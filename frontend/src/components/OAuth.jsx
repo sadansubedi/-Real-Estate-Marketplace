@@ -17,13 +17,14 @@ const OAuth = () => {
               headers:{
                 'Content-Type':'application/json',
               },
-              body: JSON.stringify({
+              body: JSON.stringify({//name,email,photo are sent to backend i.e authcontroller.js google line no 61,62,64
                 name:result.user.displayName,
                 email:result.user.email,
                 photo:result.user.photoURL
               })
             })
             const data = await res.json();
+            console.log(data)
             dispatch(signInSuccess(data));
             navigate("/");
 
