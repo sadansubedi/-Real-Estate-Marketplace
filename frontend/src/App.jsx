@@ -5,6 +5,7 @@ import About from './pages/About.jsx'
 import Signin from './pages/Signin.jsx'
 import Signup from './pages/Signup.jsx'
 import Header from "./components/Header.jsx"
+import PrivateRoute from "./components/PrivateRoute.jsx"
 function App() {
   return (
     <BrowserRouter>
@@ -12,11 +13,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/about" element={<About/>}/>
-      <Route path="/profile" element={<Profile/>}/>
       <Route path="/signin" element={<Signin/>}/>
       <Route path="/signup" element={<Signup/>}/>
+      <Route element={<PrivateRoute/>}>
+        <Route path="/profile" element={<Profile/>}/>
+      </Route>
     </Routes>
-    {/* <h1 className='text-green-700 bg-slate-950'>aba app hoina </h1> */}
     </BrowserRouter>
   )
 }
