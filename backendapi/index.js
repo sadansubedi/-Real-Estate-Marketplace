@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 import userouter from './routes/userroute.js'
 import authrouter from './routes/authroute.js'
+import cookieParser from 'cookie-parser';
 dotenv.config();
 // console.log(process.env.MONGO_URL)
 
@@ -17,6 +18,7 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
 const port = process.env.PORT || '3000';
 
 app.use(express.json())
+app.use(cookieParser());//to retrieve cookies
 app.use("/api/user",userouter)
 app.use("/api/auth",authrouter)
 
