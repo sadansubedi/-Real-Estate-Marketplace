@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 import userouter from './routes/userroute.js'
 import authrouter from './routes/authroute.js'
+import Listingrouter from './routes/listingroute.js'
 import cookieParser from 'cookie-parser';
 dotenv.config();
 // console.log(process.env.MONGO_URL)
@@ -21,6 +22,7 @@ app.use(express.json())
 app.use(cookieParser());//to retrieve cookies
 app.use("/api/user",userouter)
 app.use("/api/auth",authrouter)
+app.use("/api/listing",Listingrouter)
 
 
 //middleware and function to handle possible error

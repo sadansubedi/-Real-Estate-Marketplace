@@ -4,6 +4,8 @@ import persistReducer from 'redux-persist/es/persistReducer'
 import storage from 'redux-persist/lib/storage'
 import persistStore from 'redux-persist/es/persistStore'
 
+//persist redux is used to store user data in local storage 
+
 const rootReducer = combineReducers({user:userReducer})
 
 const persistConfig={

@@ -20,7 +20,7 @@ const updateUser =async(req,res,next)=>{
                 password:req.body.password,
                 avatar: req.body.avatar
             }
-        },{new:true})//only new information update not previous existing information 
+        },{new:true})//only new information update not previous existing information
         const {password,...rest}= updatedUser._doc;
         res.status(200).json(rest)
     } catch (error) {
