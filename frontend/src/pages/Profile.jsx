@@ -108,6 +108,7 @@ const [userlistings , setuserlistings] = useState([]);
  const handleShowListings = async()=>{
   try {
     setshowListingError(false);
+    console.log(currentUser._id);
     const res = await fetch(`/api/user/listings/${currentUser._id}`);
     const data = await res.json();
 
@@ -191,7 +192,9 @@ const [userlistings , setuserlistings] = useState([]);
                     </Link>
                     <div className="flex flex-col items-center">
                       <button onClick={()=>handleListingDelete(listing._id)} className="text-red-700 uppercase">Delete</button>
+                      <Link to={`/update-listing/${listing._id}`}>
                       <button className="text-green-700 uppercase">Edit</button>
+                      </Link>
                     </div>
                 </div>
       
