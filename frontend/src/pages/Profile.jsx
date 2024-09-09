@@ -176,7 +176,7 @@ const [userlistings , setuserlistings] = useState([]);
       <p className="text-red-700">{error ? error : ''}</p>
       <p className="text-green-700 mt-5">{updatesucess ? 'User is updated Successfully' : ''}</p>
       <button onClick={handleShowListings} className="text-green-700 w-full ">Show Listing</button>
-      <p>{showLisitngError ? 'Error Showing listing' :''}</p>
+      <p  className="text-red-700 mt-5 text-center uppercase ">{showLisitngError ? 'token expire please Sign-In again ' :''}</p>
       {
         userlistings && userlistings.length > 0 &&
         <div className="flex flex-col gap-4">
