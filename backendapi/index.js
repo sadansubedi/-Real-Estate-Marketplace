@@ -5,6 +5,7 @@ import userouter from './routes/userroute.js'
 import authrouter from './routes/authroute.js'
 import Listingrouter from './routes/listingroute.js'
 import cookieParser from 'cookie-parser';
+import path from 'path';
 dotenv.config();
 // console.log(process.env.MONGO_URL)
 
@@ -14,8 +15,9 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
     console.log("connected to mongodb");
 }).catch((error)=>{
     console.log(error)    
-})
+});
 
+const __dirname = path.resolve();
 const port = process.env.PORT || '3000';
 
 app.use(express.json())
@@ -24,6 +26,10 @@ app.use("/api/user",userouter)
 app.use("/api/auth",authrouter)
 app.use("/api/listing",Listingrouter)
 
+app.use(express.static(path.join(__dirname,'/frontend/dist')));
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'client','dist','index.html'));
+})
 
 //middleware and function to handle possible error
 app.use((err,req,res,next)=>{
