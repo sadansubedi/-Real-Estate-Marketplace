@@ -1,7 +1,7 @@
 Real Estate Marketplace 🏡
 A real estate platform built with the MERN stack, featuring secure user authentication, property listing management, and advanced search capabilities.
 
-Key Features
+Key Features<br>
 🔐 Secure User Authentication
 JWT Integration: Secure access to the app using JSON Web Tokens (JWT).
 Firebase Authentication: Seamless authentication and verification with Firebase.
