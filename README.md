@@ -13,7 +13,7 @@ Database: MongoDB is used to store all property listings, user information, and 
 Image Uploads: Allow users to upload property images for better listings.<br>
 Property Management: Users can manage their listings, including updating and removing properties.<br>
 🔍 Advanced Search Functionality<br>
-Cutting-Edge Search: Help users find properties quickly with advanced filters and search options.<br>
+Cutting-Edge Search: Help users find properties quickly with advanced filters and search options , copy link option.<br>
 Deploy on Render: Deployed MERN app using the Render platform <br>
 <br>
 Prerequisites<br>
